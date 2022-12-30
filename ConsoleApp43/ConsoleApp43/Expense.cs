@@ -1,21 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ConsoleApp43
+namespace ConsoleApp44
 {
-    internal class Expense
+    public class Expense
     {
-
         public int ID { get; set; }
-        public string? Name { get; set; }
-        public string? Location { get; set; }
+        public string Description { get; set; }
 
-        public DateOnly Date { get; set; }
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
+        public DateTime DateIncurred { get; set; }
 
-        public double Amount { get; set; }
+        public string Location { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Column(TypeName="decimal(18,2)")]
+        public double Price { get; set; }
+
+        // Expense Type ID (foreign key)
+        [Display(Name = "Expense Type")]
+        public int ExpenseTypeID { get; set; }
+        // Expense Type
+        public ExpenseType ExpenseType { get; set; }
+
+        // User ID
+        public int UserID { get; set; }
 
     }
 }
